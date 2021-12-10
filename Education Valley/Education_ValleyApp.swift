@@ -11,7 +11,7 @@ import SwiftUI
 struct Education_ValleyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MenuView()
         }
     }
 }
