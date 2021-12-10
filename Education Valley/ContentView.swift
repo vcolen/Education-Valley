@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-     var initialValue: Int
-     var finalValue: Int
     @State private var result = ""
     
     @State private var currentInitalValue = 1
@@ -23,6 +21,8 @@ struct ContentView: View {
     @State private var currentQuestion = 0
     @State private var score = 0
     
+    var initialValue: Int
+    var finalValue: Int
     var numberOfQuestions: Int
     
     var body: some View {
@@ -33,6 +33,7 @@ struct ContentView: View {
                 
                 TextField("Result", text: $result)
                     .padding()
+                    .keyboardType(.numberPad)
                 
                 Button("Check Result") {
                     checkResult()
@@ -50,7 +51,7 @@ struct ContentView: View {
             }
             
             .alert(alertTitle, isPresented: $isShowingEndGame) {
-                NavigationLink("Try Again.", destination: MenuView())
+                NavigationLink("Play Again!", destination: MenuView())
                 
             } message: {
                 Text(alertMessage)
@@ -84,6 +85,7 @@ struct ContentView: View {
         } else {
             endGame()
         }
+        result = ""
     }
     
     func endGame() {
