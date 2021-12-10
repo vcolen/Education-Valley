@@ -29,21 +29,35 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 50) {
-                Text("\(currentInitalValue) X \(currentFinalValue)?")
-                    .font(.largeTitle)
-                    .rotation3DEffect(.degrees(rotationAmount), axis: (x: 0, y: 0, z: 1))
+            ZStack {
+                LinearGradient(colors: [.red, .orange], startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
                 
-                TextField("Result", text: $result)
+                VStack(spacing: 50) {
+                    Text("\(currentInitalValue) X \(currentFinalValue)?")
+                        .foregroundColor(.white)
+                        .font(.largeTitle)
+                        .rotation3DEffect(.degrees(rotationAmount), axis: (x: 0, y: 0, z: 1))
+                    ZStack {
+                        LinearGradient(colors: [.red, .orange], startPoint: .bottom, endPoint: .top)
+                            .cornerRadius(25)
+                    TextField("Result", text: $result)
+                        .padding()
+                        .keyboardType(.numberPad)
+                        .foregroundColor(.white)
+                    }
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding()
-                    .keyboardType(.numberPad)
-                
-                Button("Check Result") {
-                    checkResult()
-                }
-                
-                Text("Score: \(score) / \(numberOfQuestions)")
+                    
+                    Button("Check Result") {
+                        checkResult()
+                    }
                     .font(.title2)
+                    
+                    Text("Score: \(score) / \(numberOfQuestions)")
+                        .font(.title2)
+                        .foregroundColor(.white)
+                }
             }
             .alert(alertTitle, isPresented: $isShowingScore) {
                 Button("Next Question") {
@@ -69,11 +83,11 @@ struct ContentView: View {
     func checkResult() {
         if Int(result) == currentInitalValue * currentFinalValue {
             alertTitle = "Nice job!"
-            alertMessage = "You got it right"
+            alertMessage = "You got it right!"
             score += 1
         } else {
-            alertTitle = "Oops, wrong answer"
-            alertMessage = "Correct answer was \(currentInitalValue * currentFinalValue)"
+            alertTitle = "Oops, wrong answer!"
+            alertMessage = "Correct answer was \(currentInitalValue * currentFinalValue)."
         }
         
         isShowingScore = true
@@ -95,8 +109,8 @@ struct ContentView: View {
     }
     
     func endGame() {
-        alertTitle = "The game has ended"
-        alertMessage = "Your got \(score) out of \(numberOfQuestions) questions."
+        alertTitle = "The game has ended."
+        alertMessage = "You got \(score) out of \(numberOfQuestions) questions."
         isShowingEndGame = true
         
         currentQuestion = 0

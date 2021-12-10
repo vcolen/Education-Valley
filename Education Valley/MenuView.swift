@@ -9,28 +9,55 @@ import SwiftUI
 
 struct MenuView: View {
     @State private var numberOfQuestions = 10
-    @State private var initalValue = 0
+    @State private var initalValue = 2
     @State private var finalValue = 10
+
     var body: some View {
         NavigationView {
-            VStack(alignment: .center, spacing: 50) {
-                Stepper("How many questions? Current: \(numberOfQuestions)", value: $numberOfQuestions, in: 5...20, step: 5)
-                
-                Text("Choose the inital Value")
-                Picker("Inital value", selection: $initalValue) {
-                    ForEach(1..<101) {
-                        Text(String($0))
+            ZStack {
+                LinearGradient(colors: [.red, .orange], startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                VStack(alignment: .center, spacing: 30) {
+                    ZStack {
+                        LinearGradient(colors: [.red, .orange], startPoint: .bottom, endPoint: .top)
+                        Stepper("Questions: \(numberOfQuestions)", value: $numberOfQuestions, in: 5...20, step: 5)
+                            .padding()
+                            .font(.title)
+                            .foregroundColor(.white)
                     }
-                }
-                
-                Text("Choose the final Value")
-                Picker("Final value", selection: $finalValue) {
-                    ForEach(initalValue + 2..<101, id: \.self) {
-                        Text(String($0))
+                    .cornerRadius(25)
+                    .padding()
+                    
+                    ZStack {
+                        LinearGradient(colors: [.red, .orange], startPoint: .bottom, endPoint: .top)
+                        HStack {
+                            Text("Starting from ")
+                                .font(.title)
+                                .foregroundColor(.white)
+                            Picker("Minimal value", selection: $initalValue) {
+                                ForEach(2..<12) {
+                                    Text(String($0))
+                                }
+                            }
+                            
+                            Text(" to ")
+                                .foregroundColor(.white)
+                                .font(.title)
+                            Picker("Max value", selection: $finalValue) {
+                                ForEach(initalValue + 3..<13, id: \.self) {
+                                    Text(String($0))
+                                }
+                            }
+                        }
+                        .padding()
                     }
+                    .cornerRadius(25)
+                    .padding()
+                    
+                    NavigationLink("Start Game", destination: ContentView(initialValue: initalValue + 2, finalValue: finalValue <= initalValue ? initalValue + 3 : finalValue, numberOfQuestions: numberOfQuestions))
+                        .font(.title)
                 }
-                
-                NavigationLink("Start Game", destination: ContentView(initialValue: initalValue + 1, finalValue: finalValue > initalValue ? finalValue : initalValue + 1, numberOfQuestions: numberOfQuestions))
+                .navigationTitle("Education Valley")
             }
         }
     }
