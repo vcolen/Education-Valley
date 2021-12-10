@@ -30,7 +30,7 @@ struct MenuView: View {
                     }
                 }
                 
-                NavigationLink("Start Game", destination: ContentView(initialValue: initalValue + 1, finalValue: finalValue, numberOfQuestions: numberOfQuestions))
+                NavigationLink("Start Game", destination: ContentView(initialValue: initalValue + 1, finalValue: finalValue > initalValue ? finalValue : initalValue + 1, numberOfQuestions: numberOfQuestions))
             }
         }
     }

@@ -25,11 +25,14 @@ struct ContentView: View {
     var finalValue: Int
     var numberOfQuestions: Int
     
+    @State private var rotationAmount = 0.0
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 50) {
                 Text("\(currentInitalValue) X \(currentFinalValue)?")
                     .font(.largeTitle)
+                    .rotation3DEffect(.degrees(rotationAmount), axis: (x: 0, y: 0, z: 1))
                 
                 TextField("Result", text: $result)
                     .padding()
@@ -77,8 +80,11 @@ struct ContentView: View {
     }
     
     func newQuestion() {
-        currentFinalValue = Int.random(in: initialValue...finalValue)
-        currentInitalValue = Int.random(in: initialValue...finalValue)
+        withAnimation {
+            rotationAmount += 360
+            currentFinalValue = Int.random(in: initialValue...finalValue)
+            currentInitalValue = Int.random(in: initialValue...finalValue)
+        }
         
         if currentQuestion < numberOfQuestions - 1{
             currentQuestion += 1
