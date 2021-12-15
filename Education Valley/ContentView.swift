@@ -30,35 +30,41 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                LinearGradient(colors: [.red, .orange], startPoint: .top, endPoint: .bottom)
+                Color.mainBackground
                     .ignoresSafeArea()
                 
                 VStack(spacing: 50) {
                     Text("\(currentInitalValue) X \(currentFinalValue)?")
-                        .foregroundColor(.white)
                         .font(.largeTitle)
                         .rotation3DEffect(.degrees(rotationAmount), axis: (x: 0, y: 0, z: 1))
-                    ZStack {
-                        LinearGradient(colors: [.red, .orange], startPoint: .bottom, endPoint: .top)
-                            .cornerRadius(25)
+
                     TextField("Result", text: $result)
                         .padding()
                         .keyboardType(.numberPad)
-                        .foregroundColor(.white)
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding()
-                    
-                    Button("Check Result") {
+                        .background(.secondBackground)
+                        .cornerRadius(25)
+                        .padding()
+
+                   
+                    Button {
                         checkResult()
+                    } label: {
+                        HStack {
+                            Image(systemName: "checkmark.seal")
+                            Text("Check result")
+                        }
+                        .padding()
+                        .background(.secondBackground)
+                        .cornerRadius(25)
                     }
-                    .font(.title2)
+                    
                     
                     Text("Score: \(score) / \(numberOfQuestions)")
                         .font(.title2)
                         .foregroundColor(.white)
                 }
             }
+            .preferredColorScheme(.dark)
             .alert(alertTitle, isPresented: $isShowingScore) {
                 Button("Next Question") {
                     newQuestion()
