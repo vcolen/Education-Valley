@@ -2,7 +2,7 @@
 
 ## What is it about?
 
-### Education Valley is a simple app, in which you decide what's the minimum and maximum value to train your multiplication skills. It's a project of day 35, from [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui), by [Paul Hudson](https://twitter.com/twostraws), to better stick with contents taught on projects 4, 5 and 6. 
+### Education Valley is a simple app, in which you decide what's the minimum and maximum value to train your multiplication skills. It's a project of day 35, from [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui), by [Paul Hudson](https://twitter.com/twostraws), to better stick with contents taught on projects 4 ([BetterRest](https://github.com/vcolen/BetterRest-app)), 5([Word Scramble](https://github.com/vcolen/WordScramble-app)) and 6(animation test field). 
 
 
 ## Version 1.1
